@@ -63,22 +63,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-                width: 295.w,
-                height: 95.h,
-                child: Customtextfield(
-                  controller: controller,
-                  hintText: "Ask question here...",
-                )),
-            Padding(
-                padding: EdgeInsets.only(bottom: 40.0.h), child: _sendButton())
-          ],
-        ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(width: 16.0.w),
+          SizedBox(
+              width: 295.w,
+              height: 50.h,
+              child: Customtextfield(
+                controller: controller,
+                hintText: "Ask question here...",
+                hasBottomSpace: false,
+              )),
+          _sendButton()
+        ],
       ),
     );
   }
