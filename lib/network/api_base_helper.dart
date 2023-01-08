@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:openaiapp/constants/api_end_point.dart';
 import 'package:openaiapp/helper/locator.dart';
+import 'package:openaiapp/key/key.dart';
 import 'package:openaiapp/model/error/error_400_response.dart';
 import 'package:openaiapp/model/error/error_401_response.dart';
 import 'package:openaiapp/model/error/error_404_response.dart';
@@ -42,7 +43,7 @@ class ApiBaseHelper {
       final response = await _chuckerHttpClient
           .post(Uri.parse(kBaseUrl + url), body: map, headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        // 'authorization': auth
+        'authorization': "Bearer $secretKey",
       });
       responseJson = _returnResponse(response);
     } on SocketException {
