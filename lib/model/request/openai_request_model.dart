@@ -21,7 +21,7 @@ class OpenaiRequestModel {
   String? prompt;
   int? maxTokens;
   double? temperature;
-  int? topP;
+  double? topP;
   int? frequencyPenalty;
   int? presencePenalty;
 

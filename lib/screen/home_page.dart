@@ -28,41 +28,43 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.fromLTRB(16.0.w, 16.0.h, 16.0.w, 0.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(question ?? '', style: style.font15.w5.tGreyShade3),
-                // SizedBox(height: 4.0.h),
-                StreamBuilder<ApiResponse<OpenaiResponseModel>>(
-                    stream: _bloc.dataStream,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        switch (snapshot.data!.status) {
-                          case Status.loading:
-                            return Center(child: LoadingScreen());
-                          case Status.completed:
-                            return ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(question ?? '', style: style.font15.w5.tGreyShade3),
+              // SizedBox(height: 4.0.h),
+              StreamBuilder<ApiResponse<OpenaiResponseModel>>(
+                  stream: _bloc.dataStream,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      switch (snapshot.data!.status) {
+                        case Status.loading:
+                          return const Center(child: LoadingScreen());
+                        case Status.completed:
+                          return SizedBox(
+                            height: 695.h,
+                            child: ListView.builder(
+                              // shrinkWrap: true,
+                              // physics: const NeverScrollableScrollPhysics(),
                               itemCount: snapshot.data?.data.choices?.length,
                               itemBuilder: (context, index) {
                                 return Text(
                                     snapshot.data?.data.choices![0]?.text ?? '',
                                     textAlign: TextAlign.justify,
-                                    style: style.font14.w4.tGrayShade2);
+                                    style: style.font16.w4.tGreyShade3);
                               },
-                            );
-                          case Status.error:
-                        }
+                            ),
+                          );
+                        case Status.error:
                       }
-                      return Text('');
-                    }),
-              ],
-            ),
+                    }
+                    return Text('');
+                  }),
+            ],
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -85,7 +87,7 @@ class _HomePageState extends State<HomePage> {
     return IconButton(
       onPressed: () {
         OpenaiRequestModel request = OpenaiRequestModel(
-            model: "text-davinci-002",
+            model: "text-davinci-003",
             prompt: controller.text,
             maxTokens: 3900,
             temperature: 0.5,
