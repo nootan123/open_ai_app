@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:openaiapp/config/init.dart';
 import 'package:openaiapp/constants/app_color.dart';
 import 'package:openaiapp/constants/font_size.dart';
 import 'package:openaiapp/constants/font_weight.dart';
@@ -8,6 +9,7 @@ import 'package:openaiapp/route/router_generator.dart';
 final navigationKey = GlobalKey<NavigatorState>();
 
 void main() {
+  config();
   runApp(const MyApp());
 }
 
